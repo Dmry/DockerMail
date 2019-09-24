@@ -1,6 +1,9 @@
 FROM ubuntu:latest
 
-RUN apt-get install postfix postfix-mysql dovecot-core dovecot-imapd dovecot-mysql dovecot-lmtpd
+RUN apt-get update &&\
+    apt-get -y install curl &&\
+    apt-get -qq -y install curl &&\
+    apt-get install postfix postfix-mysql dovecot-core dovecot-imapd dovecot-mysql dovecot-lmtpd
 
 RUN postconf -e smtpd_tls_cert_file=/etc/ssl/certs/dovecot.pem &&\
     postconf -e smtpd_tls_key_file=/etc/ssl/private/dovecot.pem &&\
