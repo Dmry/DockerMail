@@ -6,8 +6,10 @@ RUN adduser -D -s /sbin/nologin -u 2001 -G postfix postfix
 RUN apk add -uU openssl ca-certificates postfix && \
     rm -rf /var/cache/apk/*
 
-RUN postconf -e smtpd_tls_cert_file=/etc/ssl/certs/dovecot.pem &&\
-    postconf -e smtpd_tls_key_file=/etc/ssl/private/dovecot.pem &&\
+RUN openssl req -subj "/C=NL/CN=Unknown" -new -x509 -days 1000 -nodes -out "/etc/ssl/certs/postfix.pem" -keyout "/etc/ssl/private/postfix.pem"
+
+RUN postconf -e smtpd_tls_cert_file=/etc/ssl/certs/postfix.pem &&\
+    postconf -e smtpd_tls_key_file=/etc/ssl/private/postfix.pem &&\
     postconf -e smtpd_use_tls=yes &&\
     postconf -e smtpd_tls_auth_only=yes &&\
     postconf -e smtp_tls_security_level=may &&\

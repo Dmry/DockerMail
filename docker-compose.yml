@@ -3,18 +3,26 @@ version: '3.3'
 services:
   database:
     image: mysql:8
-    restart: always
+    restart: on-failure
     environment:
       MYSQL_DATABASE: 'mailserver'
       MYSQL_USER: 'mailuser'
       MYSQL_PASSWORD: 'mailtest'
       MYSQL_ROOT_PASSWORD: 'rootest'
-    ports:
-      - '3306:3306'
     expose:
       - '3306'
       # Where our data will be persisted
     volumes:
       - ./scripts/:/docker-entrypoint-initdb.d
+  postfix:
+    build: ./postfix
+    restart: on-failure
+    ports:
+      - "993:993"
+  dovecot:
+    build: ./dovecot
+    restart: on-failure
+    ports:
+      - "465:465"
 volumes:
   scripts:
