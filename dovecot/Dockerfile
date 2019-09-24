@@ -3,7 +3,7 @@ FROM alpine:latest
 RUN addgroup -g 3001 dovecot
 RUN adduser -D -s /sbin/nologin -u 2001 -G dovecot dovecot
 
-RUN apk add -uU openssl ca-certificates dovecot && \
+RUN apk add -uU openssl ca-certificates dovecot dovecot-lmtpd && \
     rm -rf /var/cache/apk/*
 
 RUN openssl req -subj "/C=NL/CN=Unknown" -new -x509 -days 1000 -nodes -out "/etc/ssl/certs/dovecot.pem" -keyout "/etc/ssl/private/dovecot.pem"
