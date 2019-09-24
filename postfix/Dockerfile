@@ -32,3 +32,6 @@ RUN postconf -e smtpd_tls_cert_file=/etc/ssl/certs/postfix.pem &&\
 ADD mysql-virtual-alias-maps.cf /etc/postfix/mysql-virtual-alias-maps.cf
 ADD mysql-virtual-mailbox-domains.cf /etc/postfix/mysql-virtual-mailbox-domains.cf
 ADD mysql-virtual-mailbox-maps.cf /etc/postfix/mysql-virtual-mailbox-maps.cf
+
+ENTRYPOINT "postfix"
+CMD ["postfix"]
