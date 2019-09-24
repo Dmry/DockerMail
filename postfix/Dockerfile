@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
 RUN apt-get update &&\
-    apt-get -y install curl &&\
+    apt-get -y install apt-utils curl &&\
     apt-get -qq -y install curl &&\
     apt-get install postfix postfix-mysql dovecot-core dovecot-imapd dovecot-mysql dovecot-lmtpd
 
