@@ -3,7 +3,7 @@ FROM alpine:latest
 RUN addgroup -g 3001 dovecot
 RUN addgroup -g 3003 postfix
 RUN adduser -D -s /sbin/nologin -u 2001 -G dovecot dovecot
-RUN adduser -D -s /sbin/nologin -u 2003 -G postfix postfix
+RUN adduser -D -s /sbin/nologin -u 1000 -G postfix postfix
 
 RUN apk add -uU openssl ca-certificates dovecot dovecot-lmtpd && \
     rm -rf /var/cache/apk/*
