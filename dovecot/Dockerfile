@@ -17,5 +17,5 @@ ADD conf.d/ /etc/dovecot/conf.d/
 RUN chown -R mail:dovecot /etc/dovecot &&\
     chmod -R o-rwx /etc/dovecot
 
-ENTRYPOINT ["dovecot -F"]
+ENTRYPOINT "dovecot -F"
 CMD ["dovecot -F"]
