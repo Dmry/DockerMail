@@ -14,6 +14,7 @@ services:
       # Where our data will be persisted
     volumes:
       - ./scripts/:/docker-entrypoint-initdb.d
+
   postfix:
     build: ./postfix
     restart: on-failure
@@ -29,6 +30,7 @@ services:
       - "465:465"
     volumes:
       - dovecot-sasl:/var/spool/postfix/private/dovecot
+      
 volumes:
     dovecot-sasl: {}
     scripts: {}
