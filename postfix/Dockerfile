@@ -3,7 +3,7 @@ FROM alpine:latest
 RUN addgroup -g 3001 postfix
 RUN adduser -D -s /sbin/nologin -u 2001 -G postfix postfix
 
-RUN apk add -uU openssl ca-certificates postfix && \
+RUN apk add -uU openssl ca-certificates postfix supervisor && \
     rm -rf /var/cache/apk/*
 
 RUN openssl req -subj "/C=NL/CN=Unknown" -new -x509 -days 1000 -nodes -out "/etc/ssl/certs/postfix.pem" -keyout "/etc/ssl/private/postfix.pem"
@@ -35,5 +35,8 @@ ADD mysql-virtual-mailbox-maps.cf /etc/postfix/mysql-virtual-mailbox-maps.cf
 
 RUN mkdir -p /var/spool/postfix/private/dovecot
 
-ENTRYPOINT "/bin/sh"
-CMD ["/usr/lib/postfix/master -d -v"]
+RUN sed -i -e "s/^nodaemon=false/nodaemon=true/" /etc/supervisord.conf
+
+COPY supervisord.d/*.ini /etc/supervisord.d/
+
+CMD supervisord
