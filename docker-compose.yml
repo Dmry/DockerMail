@@ -19,10 +19,16 @@ services:
     restart: on-failure
     ports:
       - "993:993"
+    volumes:
+      - dovecot-sasl:/var/spool/postfix/private/dovecot
+    
   dovecot:
     build: ./dovecot
     restart: on-failure
     ports:
       - "465:465"
+    volumes:
+      - dovecot-sasl:/var/spool/postfix/private/dovecot
 volumes:
-  scripts:
+    dovecot-sasl: {}
+    scripts: {}
