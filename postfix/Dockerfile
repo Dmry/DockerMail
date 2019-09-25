@@ -35,8 +35,7 @@ ADD mysql-virtual-mailbox-maps.cf /etc/postfix/mysql-virtual-mailbox-maps.cf
 
 RUN mkdir -p /var/spool/postfix/private/dovecot
 
-RUN sed -i -e "s/^nodaemon=false/nodaemon=true/" /etc/supervisord.conf
-
 COPY ./supervisord.d/*.ini /etc/supervisord.d/
+COPY supervisord.conf /etc/
 
 CMD supervisord
