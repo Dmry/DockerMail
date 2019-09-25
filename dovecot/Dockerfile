@@ -18,4 +18,4 @@ RUN chown -R mail:dovecot /etc/dovecot &&\
     chmod -R o-rwx /etc/dovecot
 
 ENTRYPOINT "dovecot"
-CMD ["dovecot"]
+CMD ["dovecot -F"]
