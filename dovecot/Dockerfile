@@ -19,5 +19,4 @@ RUN chown -R mail:dovecot /etc/dovecot &&\
 
 RUN mkdir -p /var/spool/postfix/private/dovecot
 
-ENTRYPOINT "/bin/sh"
-CMD ["dovecot -F"]
+CMD dovecot -F
