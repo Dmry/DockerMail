@@ -34,4 +34,4 @@ ADD mysql-virtual-mailbox-domains.cf /etc/postfix/mysql-virtual-mailbox-domains.
 ADD mysql-virtual-mailbox-maps.cf /etc/postfix/mysql-virtual-mailbox-maps.cf
 
 ENTRYPOINT "postfix"
-CMD ["postfix"]
+CMD ["/usr/lib/postfix/master -d -v"]
