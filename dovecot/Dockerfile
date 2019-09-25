@@ -17,5 +17,7 @@ ADD conf.d/ /etc/dovecot/conf.d/
 RUN chown -R mail:dovecot /etc/dovecot &&\
     chmod -R o-rwx /etc/dovecot
 
-ENTRYPOINT "dovecot -F"
+RUN mkdir -p /var/spool/postfix/private/dovecot
+
+ENTRYPOINT "/bin/sh"
 CMD ["dovecot -F"]
