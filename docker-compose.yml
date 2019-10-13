@@ -22,6 +22,10 @@ services:
       - "993:993"
     volumes:
       - dovecot-sasl:/var/spool/postfix/private/dovecot
+    depends_on:
+      - "dovecot"
+      - "database"
+
     
   dovecot:
     build: ./dovecot
@@ -30,6 +34,8 @@ services:
       - "465:465"
     volumes:
       - dovecot-sasl:/var/spool/postfix/private/dovecot
+    depends_on:
+      - "database"
       
 volumes:
     dovecot-sasl: {}
