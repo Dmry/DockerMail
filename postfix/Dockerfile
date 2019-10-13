@@ -16,7 +16,7 @@ RUN postconf -e smtpd_tls_cert_file=/etc/ssl/certs/postfix.pem &&\
     postconf -e smtp_tls_loglevel=2 &&\
     postconf -e smtpd_tls_received_header=yes &&\
     postconf -e smtpd_sasl_type=dovecot &&\
-    postconf -e smtpd_sasl_path=private/auth &&\
+    postconf -e smtpd_sasl_path=private/dovecot/auth &&\
     postconf -e smtpd_sasl_auth_enable=yes &&\
     postconf -e smtpd_recipient_restrictions='\
         permit_sasl_authenticated,\
