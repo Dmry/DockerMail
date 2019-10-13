@@ -32,7 +32,7 @@ services:
     build: ./dovecot
     restart: on-failure
     ports:
-      - "465:465"
+      - "193:193"
     volumes:
       - dovecot-sasl:/var/spool/postfix/private/dovecot
     depends_on:
