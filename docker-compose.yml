@@ -19,7 +19,7 @@ services:
     build: ./postfix
     restart: on-failure
     ports:
-      - "993:993"
+      - "25:25"
     volumes:
       - dovecot-sasl:/var/spool/postfix/private/dovecot
     depends_on:
