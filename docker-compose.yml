@@ -7,7 +7,7 @@ services:
     environment:
       MYSQL_DATABASE: 'mailserver'
       MYSQL_USER: 'mailuser'
-      MYSQL_PASSWORD: 'mailtest'
+      MYSQL_PASSWORD: 'mailuserpass'
       MYSQL_ROOT_PASSWORD: 'rootest'
     expose:
       - '3306'
