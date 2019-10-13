@@ -17,6 +17,8 @@ ADD conf.d/ /etc/dovecot/conf.d/
 RUN chown -R mail:dovecot /etc/dovecot &&\
     chmod -R o-rwx /etc/dovecot
 
+RUN postconf maillog_file=/var/log/postfix.log
+
 RUN mkdir -p /var/spool/postfix/private/dovecot
 
 CMD dovecot -F
