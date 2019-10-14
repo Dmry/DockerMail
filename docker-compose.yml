@@ -22,6 +22,8 @@ services:
       - "25:25"
     volumes:
       - dovecot-sasl:/var/spool/postfix/private/dovecot
+      # for fail2ban
+      - /var/log/postfix/:/var/log/
     depends_on:
       - "dovecot"
       - "database"
@@ -34,6 +36,8 @@ services:
       - "993:993"
     volumes:
       - dovecot-sasl:/var/spool/postfix/private/dovecot
+      # for fail2ban
+      - /var/log/dovecot/:/var/log/
     depends_on:
       - "database"
       
