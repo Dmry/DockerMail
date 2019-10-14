@@ -18,5 +18,6 @@ RUN chown -R mail:dovecot /etc/dovecot &&\
     chmod -R o-rwx /etc/dovecot
 
 RUN mkdir -p /var/spool/postfix/private/dovecot
+RUN mkdir -p /mail
 
 CMD dovecot -F

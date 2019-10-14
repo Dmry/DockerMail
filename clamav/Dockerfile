@@ -7,6 +7,6 @@ RUN apk add -uU clamav freshclam supervisor && \
 #RUN sed -i 's/#sieve_plugins =/sieve_plugins = sieve_extprograms/g' /etc/dovecot/conf.d/90-sieve.conf
 
 COPY ./supervisord.d/*.ini /etc/supervisord.d/
-COPY supervisord.conf /etc/
+COPY ../shared/supervisord.conf /etc/
 
 CMD supervisord
