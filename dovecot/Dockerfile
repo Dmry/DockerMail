@@ -5,7 +5,7 @@ RUN addgroup -g 3003 postfix
 RUN adduser -D -s /sbin/nologin -u 2001 -G dovecot dovecot
 RUN adduser -D -s /sbin/nologin -u 1000 -G postfix postfix
 
-RUN apk add -uU openssl ca-certificates dovecot dovecot-lmtpd && \
+RUN apk add -uU openssl ca-certificates dovecot dovecot-lmtpd dovecot-mysql && \
     rm -rf /var/cache/apk/*
 
 RUN openssl req -subj "/C=NL/CN=Unknown" -new -x509 -days 1000 -nodes -out "/etc/ssl/certs/dovecot.pem" -keyout "/etc/ssl/private/dovecot.pem"
