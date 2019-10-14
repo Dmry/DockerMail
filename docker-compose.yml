@@ -27,7 +27,6 @@ services:
     depends_on:
       - "dovecot"
       - "database"
-
     
   dovecot:
     build: ./dovecot
@@ -40,6 +39,11 @@ services:
       - /var/log/dovecot/:/var/log/
     depends_on:
       - "database"
+
+  av:
+    build: ./clamav
+    restart: on-failure
+
       
 volumes:
     dovecot-sasl: {}
