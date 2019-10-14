@@ -35,4 +35,4 @@ VALUES
 INSERT INTO `mailserver`.`virtual_users`
   (`id`, `domain_id`, `password` , `email`)
 VALUES
-  ('1', '1', '$6$i.Z.k6bh59Dv1HD6$Jo190AONtO1G1F0jTAJoPyHffqBod56Q.cRfzydNmOqSTnIS4xLXLv/IAA1ogf8ekSkqfYcOCAqranR6YdTVk.', 'testuser@maildomain.com');
+  ('1', '1', '$2y$05$n/.9RJn7SGqu.WZQEwB08uRW6773PMvZ3IBkl9ec1phdykQh0zdhy', 'testuser@maildomain.com');
