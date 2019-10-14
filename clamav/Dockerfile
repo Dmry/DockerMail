@@ -9,7 +9,7 @@ RUN apk add -uU clamav clamav-milter freshclam supervisor && \
 COPY ./clamav-milter.conf /etc/clamav/
 COPY ./clamd.conf /etc/clamav/
 
-RUN mkdir /run/clamav/ && chown -R clam.clam /var/run/clamav/
+RUN mkdir -p /run/clamav/ && chown -R clamav.clamav /var/run/clamav/
 
 COPY ./supervisord.d/*.ini /etc/supervisord.d/
 COPY ./supervisord.conf /etc/
