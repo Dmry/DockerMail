@@ -23,6 +23,10 @@ CREATE TABLE `virtual_aliases` (
   FOREIGN KEY (domain_id) REFERENCES virtual_domains(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ALTER USER mailuser
+IDENTIFIED WITH mysql_native_password
+BY 'mailuserpass';
+
 INSERT INTO `mailserver`.`virtual_domains`
   (`id` ,`name`)
 VALUES
