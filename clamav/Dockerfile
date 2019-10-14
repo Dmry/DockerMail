@@ -7,7 +7,7 @@ RUN apk add -uU clamav clamav-milter freshclam supervisor && \
 #RUN sed -i 's/#sieve_plugins =/sieve_plugins = sieve_extprograms/g' /etc/dovecot/conf.d/90-sieve.conf
 
 COPY ./clamav-milter.conf /etc/clamav/
-COPY ./clamav.conf /etc/clamav/
+COPY ./clamd.conf /etc/clamav/
 
 COPY ./supervisord.d/*.ini /etc/supervisord.d/
 COPY ./supervisord.conf /etc/
