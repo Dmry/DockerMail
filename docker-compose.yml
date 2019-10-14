@@ -27,6 +27,7 @@ services:
     depends_on:
       - "dovecot"
       - "database"
+      - "av"
     
   dovecot:
     build: ./dovecot
@@ -43,6 +44,8 @@ services:
   av:
     build: ./clamav
     restart: on-failure
+    expose:
+      - '6666'
 
       
 volumes:

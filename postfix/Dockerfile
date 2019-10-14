@@ -14,6 +14,7 @@ RUN postconf -e smtpd_tls_cert_file=/etc/ssl/certs/postfix.pem &&\
     postconf -e smtpd_tls_auth_only=yes &&\
     postconf -e smtp_tls_security_level=encrypt &&\
     postconf -e smtp_tls_loglevel=2 &&\
+    postconf -e smtpd_milters=inet:av:6666 &&\
     postconf -e smtpd_tls_received_header=yes &&\
     postconf -e smtpd_sasl_type=dovecot &&\
     postconf -e smtpd_sasl_path=private/dovecot/auth &&\
