@@ -2,7 +2,7 @@
 
 apt install -y fail2ban
 
-hostfiles = "../hostfiles"
+hostfiles = "../hostsetup"
 
 containers=(dovecot postfix)
 
