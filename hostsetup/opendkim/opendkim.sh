@@ -9,7 +9,7 @@ do
 
             read domain
 
-            apt-get install opendkim opendkim-tools
+            apt-get install -y opendkim opendkim-tools
             mkdir -pv /etc/opendkim/
             opendkim-genkey -b 2048 -r -h rsa-sha256 -d $domain -s /etc/opendkim/mail
             mv -v /etc/opendkim/mail.private /etc/opendkim/mail
