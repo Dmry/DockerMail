@@ -3,7 +3,10 @@ FROM alpine:latest
 RUN addgroup -g 3001 postfix
 RUN adduser -D -s /sbin/nologin -u 2001 -G postfix postfix
 
-RUN apk add -uU openssl ca-certificates postfix postfix-mysql opendkim supervisor && \
+#for opendmarc
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+
+RUN apk update && apk add -uU openssl ca-certificates postfix postfix-mysql opendkim opendmarc supervisor && \
     rm -rf /var/cache/apk/* &&\
     echo "0       4       *       *       *       apk update && apk upgrade > /var/log/cron-apk.log" >> /var/spool/cron/crontabs/root
 
@@ -14,9 +17,8 @@ RUN echo "maildomain.com maildomain.com:mail:/etc/opendkim/mail" > /etc/opendkim
 COPY ./opendkim.conf /etc/opendkim/
 RUN install -d -o opendkim -g opendkim /var/run/opendkim
 
-#chown -R opendkim:opendkim /etc/opendkim && chmod go-rwx /etc/opendkim/* &&\
-#    opendkim-genkey -r -h rsa-sha256 -d maildomain.com -s /etc/opendkim/mail &&\
-#    cat etc/opendkim/mail.txt
+COPY ./opendmarc.conf /etc/opendmarc/opendmarc.conf
+RUN install -d -o opendmarc -g opendmarc /var/run/opendmarc
 
 RUN openssl req -subj "/C=NL/CN=Unknown" -new -x509 -days 1000 -nodes -out "/etc/ssl/certs/postfix.pem" -keyout "/etc/ssl/private/postfix.pem"
 
@@ -26,7 +28,7 @@ RUN postconf -e smtpd_tls_cert_file=/etc/ssl/certs/postfix.pem &&\
     postconf -e smtpd_tls_auth_only=yes &&\
     postconf -e smtp_tls_security_level=encrypt &&\
     postconf -e smtp_tls_loglevel=2 &&\
-    postconf -e smtpd_milters=inet:av:6666,inet:127.0.0.1:6667 &&\
+    postconf -e smtpd_milters=inet:av:6666,inet:127.0.0.1:6667,inet:127.0.0.1:6668 &&\
     postconf -e milter_default_action=accept &&\
     postconf -e smtpd_tls_received_header=yes &&\
     postconf -e smtpd_sasl_type=dovecot &&\
