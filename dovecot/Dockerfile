@@ -20,7 +20,4 @@ RUN chown -R mail:dovecot /etc/dovecot &&\
 
 RUN mkdir -p /var/spool/postfix/private/dovecot
 
-COPY adduser.sh /adduser.sh
-RUN chmod u+x /adduser.sh
-
 CMD dovecot -F
