@@ -18,8 +18,8 @@ The different containers:
 *   MySQL is used as the database. User passwords are hashed with BCRYPT before storage.
 *   Dovecot is used as the IMAP server and is configured to only accept TLS connections at port 993. Certificates are self-signed.
 *   Postmap is used as the SMTP server and is configured to only accept STARTTLS auth connections at port 25. This requires authentication using your imap credentials. Certificates are self-signed.
-  *E-mail is sent over TLS when the receiving end supports it. You can make TLS encryption mandatory by setting smtp_tls_security_level=encrypt in the Dockerfile. WARNING: this _will_ lead to email not being delivered. [Nor does postfix recommend this](http://www.postfix.org/postconf.5.html#smtp_tls_security_level).
-  *The authentication is done in Base64 encoding and relies on SSL to keep the authentication safe. The only real alternative is (CRAM-)MD5, but that would only allow storage of password hashes using (the very easily crackable) MD5 hash. Given that MD5 is unsafe and the algorithm also provides no source validation, I find it does not provide any real extra security over Base64.
+  * E-mail is sent over TLS when the receiving end supports it. You can make TLS encryption mandatory by setting smtp_tls_security_level=encrypt in the Dockerfile. WARNING: this _will_ lead to email not being delivered. [Nor does postfix recommend this](http://www.postfix.org/postconf.5.html#smtp_tls_security_level).
+  * The authentication is done in Base64 encoding and relies on SSL to keep the authentication safe. The only real alternative is (CRAM-)MD5, but that would only allow storage of password hashes using (the very easily crackable) MD5 hash. Given that MD5 is unsafe and the algorithm also provides no source validation, I find it does not provide any real extra security over Base64.
   * OpenDKIM and OpenDMARC help to prevent e-mail spoofing and make sure your e-mail gets through spam filters.
 *   ClamAV is used to scan e-mail for virusses.
   * Freshclam will automatically update the virus definitions.
@@ -78,3 +78,17 @@ Set an appropriate long, random password as the MYSQL_ROOT_PASSWORD in:
 `cd` into the dockermail directory. Run `docker-compose up -d` to set up and run the containers.
 
 If you use only one domain, you can use scripts/adduser.sh to generate new users for IMAP and SMTP.
+
+## OpSec
+
+I highly advise you to change the mysql root password you set in the files after running all of this. You can use the following and substitute 'PASSWORD':
+
+```
+docker exec -it dockermail_database_1  
+mysql -u root -p
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'PASSWORD';
+```
+
+This will persist in the database through rebuilds.  
+
+Another piece of advise: remove the mailuser password from the files above after you're done.
