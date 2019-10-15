@@ -11,17 +11,16 @@ do
 
             apt-get install opendkim opendkim-tools
             mkdir -pv /etc/opendkim/
-            chown -Rv opendkim:opendkim /etc/opendkim
-            chmod go-rwx /etc/opendkim/*
             opendkim-genkey -r -h rsa-sha256 -d $domain -s /etc/opendkim/mail
             mv -v /etc/opendkim/mail.private /etc/opendkim/mail
-
-            cp 
 
             echo "Use the output below to make a TXT record at your DNS with the following format (bracketed is optional):"
             echo "mail._domainkey[.subdomain]      300 TXT 'v=DKIM1; h=rsa-sha256; k=rsa; p=KeYreTuRnEdBeLoW"
 
-            cat mail.txt;
+            cat /etc/opendkim/mail.txt;
+
+            chown -Rv opendkim:opendkim /etc/opendkim
+            chmod -R go-rwx /etc/opendkim
             break ;;
    [nN]* )  exit;;
 
