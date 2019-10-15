@@ -47,6 +47,8 @@ Hardware:
 
 ## Preparing the host
 
+NOTE: The (outdated) version of docker-compose in Ubuntu 18.04.3's repository seems to have a breaking bug in it. I've added a manual install in docker.sh.
+
 Scripts to automate host configuration and dependencies can be found in the 'hostsetup' folder. Run the shell scripts in each folder, don't forget to `chmod +x` and run as sudo (be sure to verify that they won't break anythin on your system!). Review the contents section for the purpose of the different scripts.  
   
 WARNING: Not running these may lead to a broken install and will compromise security.
