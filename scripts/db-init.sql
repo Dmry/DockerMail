@@ -31,8 +31,3 @@ INSERT INTO `mailserver`.`virtual_domains`
   (`id` ,`name`)
 VALUES
   ('1', 'maildomain.com');
-
-INSERT INTO `mailserver`.`virtual_users`
-  (`id`, `domain_id`, `password` , `email`)
-VALUES
-  ('1', '1', '$2y$05$n/.9RJn7SGqu.WZQEwB08uRW6773PMvZ3IBkl9ec1phdykQh0zdhy', 'testuser@maildomain.com');
