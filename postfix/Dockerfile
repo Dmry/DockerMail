@@ -4,7 +4,7 @@ RUN addgroup -g 3001 postfix
 RUN adduser -D -s /sbin/nologin -u 2001 -G postfix postfix
 
 RUN addgroup -g 3002 opendmarc
-RUN adduser -D -s /sbin/nologin -u 2001 -G opendmarc opendmarc
+RUN adduser -D -s /sbin/nologin -u 2002 -G opendmarc opendmarc
 
 #for opendmarc
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
