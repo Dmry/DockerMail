@@ -11,7 +11,6 @@ services:
       MYSQL_ROOT_PASSWORD: 'rootest'
     expose:
       - '3306'
-      # Where our data will be persisted
     volumes:
       - ./scripts/:/docker-entrypoint-initdb.d
 
@@ -24,6 +23,8 @@ services:
       - dovecot-sasl:/var/spool/postfix/private/dovecot
       # for fail2ban
       - /var/log/postfix/:/var/log/
+      # opendkim config
+      - /etc/opendkim/mail:/etc/opendkim/mail
     depends_on:
       - "dovecot"
       - "database"
