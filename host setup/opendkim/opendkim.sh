@@ -11,7 +11,7 @@ do
 
             apt-get install opendkim opendkim-tools
             mkdir -pv /etc/opendkim/
-            opendkim-genkey -r -h rsa-sha256 -d $domain -s /etc/opendkim/mail
+            opendkim-genkey -b 2048 -r -h rsa-sha256 -d $domain -s /etc/opendkim/mail
             mv -v /etc/opendkim/mail.private /etc/opendkim/mail
 
             echo "Use the output below to make a TXT record at your DNS with the following format (bracketed is optional):"
