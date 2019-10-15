@@ -20,4 +20,6 @@ RUN chown -R mail:dovecot /etc/dovecot &&\
 
 RUN mkdir -p /var/spool/postfix/private/dovecot
 
+RUN install -d -o mail -g dovecot /mail
+
 CMD dovecot -F
