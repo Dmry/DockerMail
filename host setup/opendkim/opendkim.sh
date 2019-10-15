@@ -19,7 +19,7 @@ do
             cp 
 
             echo "Use the output below to make a TXT record at your DNS with the following format (bracketed is optional):\n mail._domainkey[.subdomain]      300 TXT 'v=DKIM1; h=rsa-sha256; k=rsa; p=KeYreTuRnEdBeLoW'\n"
-            cat mail.txt
+            cat mail.txt ;;
    [nN]* )  exit;;
 
    * )      echo "y or n."; break ;;
