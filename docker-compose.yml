@@ -13,7 +13,7 @@ services:
       - '3306'
     volumes:
       - ./scripts/db-init.sql:/docker-entrypoint-initdb.d/db-init.sql
-      - dockermail-mysql-db:/var/lib/mysql
+      - mysql_db:/var/lib/mysql
 
   postfix:
     build: ./postfix
@@ -21,7 +21,7 @@ services:
     ports:
       - "25:25"
     volumes:
-      - dockermail-dovecot-sasl:/var/spool/postfix/private/dovecot
+      - dovecot_sasl:/var/spool/postfix/private/dovecot
       # for fail2ban
       - /var/log/postfix/:/var/log/
       # opendkim config
@@ -37,8 +37,8 @@ services:
     ports:
       - "993:993"
     volumes:
-      - dockermail-dovecot-sasl:/var/spool/postfix/private/dovecot
-      - dockermail-maildir:/mail
+      - dovecot_sasl:/var/spool/postfix/private/dovecot
+      - maildir:/mail
       # for fail2ban
       - /var/log/dovecot/:/var/log/
     depends_on:
@@ -52,6 +52,6 @@ services:
 
       
 volumes:
-    dockermail-dovecot-sasl: {}
-    dockermail-mysql-db: {}
-    dockermail-maildir: {}
+    dovecot_sasl: {}
+    mysql_db: {}
+    maildir: {}
