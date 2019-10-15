@@ -18,11 +18,11 @@ The different containers:
 *   MySQL is used as the database. User passwords are hashed with BCRYPT before storage.
 *   Dovecot is used as the IMAP server and is configured to only accept TLS connections at port 993. Certificates are self-signed.
 *   Postmap is used as the SMTP server and is configured to only accept STARTTLS auth connections at port 25. This requires authentication using your imap credentials. Certificates are self-signed.
-⋅⋅*E-mail is sent over TLS when the receiving end supports it. You can make TLS encryption mandatory by setting smtp_tls_security_level=encrypt in the Dockerfile. WARNING: this _will_ lead to email not being delivered. [Nor does postfix recommend this](http://www.postfix.org/postconf.5.html#smtp_tls_security_level).
-⋅⋅*The authentication is done in Base64 encoding and relies on SSL to keep the authentication safe. The only real alternative is (CRAM-)MD5, but that would only allow storage of password hashes using (the very easily crackable) MD5 hash. Given that MD5 is unsafe and the algorithm also provides no source validation, I find it does not provide any real extra security over Base64.
-⋅⋅* OpenDKIM and OpenDMARC help to prevent e-mail spoofing and make sure your e-mail gets through spam filters.
+  *E-mail is sent over TLS when the receiving end supports it. You can make TLS encryption mandatory by setting smtp_tls_security_level=encrypt in the Dockerfile. WARNING: this _will_ lead to email not being delivered. [Nor does postfix recommend this](http://www.postfix.org/postconf.5.html#smtp_tls_security_level).
+  *The authentication is done in Base64 encoding and relies on SSL to keep the authentication safe. The only real alternative is (CRAM-)MD5, but that would only allow storage of password hashes using (the very easily crackable) MD5 hash. Given that MD5 is unsafe and the algorithm also provides no source validation, I find it does not provide any real extra security over Base64.
+  * OpenDKIM and OpenDMARC help to prevent e-mail spoofing and make sure your e-mail gets through spam filters.
 *   ClamAV is used to scan e-mail for virusses.
-⋅⋅* Freshclam will automatically update the virus definitions.
+  * Freshclam will automatically update the virus definitions.
   
 Some general remarks about the containers:  
 *   Dovecot and Postfix containers are based on [Alpine Linux](https://www.alpinelinux.org/). MySQL is pulled from the official repository (see [dockerhub page](https://hub.docker.com/r/mysql/mysql-server)).
