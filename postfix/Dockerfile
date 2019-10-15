@@ -3,8 +3,10 @@ FROM alpine:latest
 RUN addgroup -g 3001 postfix
 RUN adduser -D -s /sbin/nologin -u 2001 -G postfix postfix
 
-RUN apk add -uU openssl ca-certificates postfix postfix-mysql supervisor && \
-    rm -rf /var/cache/apk/*
+RUN apk add -uU openssl ca-certificates postfix postfix-mysql opendkim supervisor && \
+    rm -rf /var/cache/apk/* &&\
+    echo "0       4       *       *       *       apk update && apk upgrade > /var/log/cron-apk.log" >> /var/spool/cron/crontabs/root
+
 
 RUN openssl req -subj "/C=NL/CN=Unknown" -new -x509 -days 1000 -nodes -out "/etc/ssl/certs/postfix.pem" -keyout "/etc/ssl/private/postfix.pem"
 
