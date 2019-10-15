@@ -11,6 +11,7 @@ RUN echo "maildomain.com maildomain.com:mail:/etc/opendkim/mail" > /etc/opendkim
     echo "*@maildomain.com maildomain.com"                       > /etc/opendkim/SigningTable &&\
     echo "127.0.0.1"                                             > /etc/opendkim/TrustedHosts
 
+COPY ./opendkim.conf /etc/opendkim/
 
 #chown -R opendkim:opendkim /etc/opendkim && chmod go-rwx /etc/opendkim/* &&\
 #    opendkim-genkey -r -h rsa-sha256 -d maildomain.com -s /etc/opendkim/mail &&\
