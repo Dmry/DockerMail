@@ -12,7 +12,7 @@ services:
     expose:
       - '3306'
     volumes:
-      - ./scripts/:/docker-entrypoint-initdb.d
+      - ./scripts/db-init.sql:/docker-entrypoint-initdb.d/db-init.sql
       - dockermail-mysql-db:/var/lib/mysql
 
   postfix:
