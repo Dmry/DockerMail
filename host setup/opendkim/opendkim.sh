@@ -5,7 +5,7 @@ read -p "Warning, be sure to only execute this script from the original folder (
 while true
 do
   case $answer in
-   [yY]* )  echo "Domain name?\n"
+   [yY]* )  echo "Domain name?"
 
             read domain
 
@@ -18,8 +18,11 @@ do
 
             cp 
 
-            echo "Use the output below to make a TXT record at your DNS with the following format (bracketed is optional):\n mail._domainkey[.subdomain]      300 TXT 'v=DKIM1; h=rsa-sha256; k=rsa; p=KeYreTuRnEdBeLoW'\n"
-            cat mail.txt ;;
+            echo "Use the output below to make a TXT record at your DNS with the following format (bracketed is optional):"
+            echo "mail._domainkey[.subdomain]      300 TXT 'v=DKIM1; h=rsa-sha256; k=rsa; p=KeYreTuRnEdBeLoW"
+
+            cat mail.txt;
+            break ;;
    [nN]* )  exit;;
 
    * )      echo "y or n."; break ;;
