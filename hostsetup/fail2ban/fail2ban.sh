@@ -2,7 +2,7 @@
 
 apt install -y fail2ban
 
-hostfiles = "../hostsetup"
+hostfiles="../hostsetup/fail2ban"
 
 containers=(dovecot postfix)
 
@@ -14,7 +14,7 @@ done
 
 cp $hostfiles/jail.local /etc/fail2ban/
 
-echo "ssh port?\n"
+echo "ssh port?"
 
 read ssh
 
