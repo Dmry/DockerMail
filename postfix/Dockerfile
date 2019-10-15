@@ -22,7 +22,7 @@ RUN install -d -o opendkim -g opendkim /var/run/opendkim -m 750
 
 COPY ./opendmarc.conf /etc/opendmarc/opendmarc.conf
 COPY ./ignore.hosts /etc/opendmarc/ignore.hosts
-RUN install -d -o opendmarc -g opendmarc /var/run/opendmarc -m 750
+RUN install -d -o postfix -g postfix /var/run/opendmarc -m 750
 
 RUN openssl req -subj "/C=NL/CN=Unknown" -new -x509 -days 1000 -nodes -out "/etc/ssl/certs/postfix.pem" -keyout "/etc/ssl/private/postfix.pem"
 
@@ -60,5 +60,7 @@ RUN postconf maillog_file=/var/log/postfix.log
 
 COPY ./supervisord.d/*.ini /etc/supervisord.d/
 COPY supervisord.conf /etc/
+
+RUN chown opendkim:mail /etc/opendkim/mail
 
 CMD supervisord
