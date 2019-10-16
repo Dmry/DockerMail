@@ -4,7 +4,6 @@ RUN addgroup -g 3001 postfix &&\
     adduser -D -s /sbin/nologin -u 2001 -G postfix postfix &&\
     addgroup -g 3002 opendmarc &&\
     adduser -D -s /sbin/nologin -u 2002 -G opendmarc opendmarc &&\
-    adduser postfix opendmarc
 
 #for opendmarc
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
@@ -43,8 +42,8 @@ RUN postconf -e smtpd_tls_cert_file=/etc/ssl/certs/postfix.pem &&\
         permit_sasl_authenticated,\
         permit_mynetworks,\
         reject_unauth_destination' &&\
-    postconf -e mydestination=localhost &&\
-    postconf -e virtual_transport=lmtp:unix:private/dovecot-lmtp &&\
+    postconf -e mydestination=localhost, maildomain.com &&\
+    postconf -e virtual_transport=lmtp:unix:private/dovecot/lmtp &&\
     postconf -e virtual_mailbox_domains=mysql:/etc/postfix/mysql-virtual-mailbox-domains.cf &&\
     postconf -e virtual_mailbox_maps=mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf &&\
     postconf -e virtual_alias_maps=mysql:/etc/postfix/mysql-virtual-alias-maps.cf &&\
@@ -61,6 +60,6 @@ RUN postconf maillog_file=/var/log/postfix.log
 COPY ./supervisord.d/*.ini /etc/supervisord.d/
 COPY supervisord.conf /etc/
 
-RUN chown opendkim:mail /etc/opendkim/mail
+RUN chown opendkim:opendkim /etc/opendkim/mail
 
 CMD supervisord
