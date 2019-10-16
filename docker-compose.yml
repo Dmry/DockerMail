@@ -26,6 +26,8 @@ services:
       - /var/log/postfix/:/var/log/
       # opendkim config
       - /etc/opendkim/mail:/etc/opendkim/mail
+      - /etc/letsencrypt/live/maildomain.com/fullchain.pem:/etc/ssl/certs/postfix.pem
+      - /etc/letsencrypt/live/maildomain.com/privkey.pem:/etc/ssl/private/postfix.pem
     depends_on:
       - "dovecot"
       - "database"
@@ -41,6 +43,8 @@ services:
       - maildir:/mail
       # for fail2ban
       - /var/log/dovecot/:/var/log/
+      - /etc/letsencrypt/live/maildomain.com/fullchain.pem:/etc/ssl/certs/dovecot.pem
+      - /etc/letsencrypt/live/maildomain.com/privkey.pem:/etc/ssl/private/dovecot.pem
     depends_on:
       - "database"
 

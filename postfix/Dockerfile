@@ -23,8 +23,6 @@ COPY ./opendmarc.conf /etc/opendmarc/opendmarc.conf
 COPY ./ignore.hosts /etc/opendmarc/ignore.hosts
 RUN install -d -o postfix -g postfix /var/run/opendmarc -m 750
 
-RUN openssl req -subj "/C=NL/CN=Unknown" -new -x509 -days 1000 -nodes -out "/etc/ssl/certs/postfix.pem" -keyout "/etc/ssl/private/postfix.pem"
-
 RUN postconf -e smtpd_tls_cert_file=/etc/ssl/certs/postfix.pem &&\
     postconf -e smtpd_tls_key_file=/etc/ssl/private/postfix.pem &&\
     postconf -e smtpd_use_tls=yes &&\

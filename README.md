@@ -3,7 +3,6 @@
 This is under development and should not be used in production!
 
 Still to be implemented:
-* Generate signed certificates with letsencrypt on the host and mount in containers.
 * Automated backup of docker volumes
 * Watchtower base image updates
 
@@ -42,8 +41,10 @@ Hardware:
 NOTE: The (outdated) version of docker-compose in Ubuntu 18.04.3's repository seems to have a breaking bug in it. I've added a manual install in docker.sh.
 
 Scripts to automate host configuration and dependencies can be found in the 'hostsetup' folder. Run the shell scripts in each folder, run with `sudo bash script.sh` (be sure to verify that they won't break anythin on your system!). Review the contents section for the purpose of the different scripts.  
-  
-WARNING: Not running these may lead to a broken install and will compromise security.
+
+If you already own a SSL certificate, you can skip letsencrypt/letsencrypt.sh. Just edit the part before the colon in `- /etc/letsencrypt/live/maildomain.com/fullchain.pem:/etc/ssl/certs/postfix.pem` and its private key counterpart in docker-compose.yml to point to your own certificate.
+
+WARNING: Not running the rest may lead to a broken install and will compromise security.
 
 ## Setting DNS records
 
@@ -83,7 +84,7 @@ Set an appropriate long, random password as the MYSQL_ROOT_PASSWORD in:
 
 If you use only one domain, you can use scripts/adduser.sh to generate new users for IMAP and SMTP.
 
-## OpSec
+## Lastly
 
 I highly advise you to change the mysql root password you set in the files after running all of this. You can use the following and substitute 'PASSWORD':
 

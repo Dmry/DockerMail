@@ -9,7 +9,7 @@ RUN apk add -uU openssl ca-certificates dovecot dovecot-lmtpd dovecot-mysql && \
     rm -rf /var/cache/apk/* &&\
     echo "0       4       *       *       *       apk update && apk upgrade > /var/log/cron-apk.log" >> /var/spool/cron/crontabs/root
 
-RUN openssl req -subj "/C=NL/CN=Unknown" -new -x509 -days 1000 -nodes -out "/etc/ssl/certs/dovecot.pem" -keyout "/etc/ssl/private/dovecot.pem"
+#RUN openssl req -subj "/C=NL/CN=Unknown" -new -x509 -days 1000 -nodes -out "/etc/ssl/certs/dovecot.pem" -keyout "/etc/ssl/private/dovecot.pem"
 
 ADD dovecot.conf /etc/dovecot/dovecot.conf
 ADD dovecot-sql.conf.ext /etc/dovecot/dovecot-sql.conf.ext
