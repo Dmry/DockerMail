@@ -4,6 +4,11 @@ echo "This will install letsencrypt, generate a certificate for you domain and s
 echo "WARNING: If you already have a certificate, please edit docker-compose.yml to mount the correct certificate in the postfix and dovecot containers."
 read -p "If you already have a certificate, do NOT choose yes. Contine (y/n)?" answer
 
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root."
+  exit
+fi
+
 while true
 do
   case $answer in

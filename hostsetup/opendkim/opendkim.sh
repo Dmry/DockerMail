@@ -2,6 +2,12 @@
 
 read -p "Warning, be sure to only execute this script from the original folder (host setup/opendkim) of the dockermail root folder. The root folder must also contain the postfix files in the similarly named folder. Continue (y/n)?" answer
 
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root."
+  exit
+fi
+
+
 while true
 do
   case $answer in
