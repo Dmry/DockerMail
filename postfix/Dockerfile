@@ -1,5 +1,7 @@
 FROM alpine:latest
 
+LABEL maintainer="Daniël Emmery : github.com/dmry"
+
 RUN addgroup -g 3001 postfix &&\
     adduser -D -s /sbin/nologin -u 2001 -G postfix postfix &&\
     addgroup -g 3002 opendmarc &&\
@@ -51,6 +53,8 @@ ADD mysql-virtual-alias-maps.cf /etc/postfix/mysql-virtual-alias-maps.cf
 ADD mysql-virtual-mailbox-domains.cf /etc/postfix/mysql-virtual-mailbox-domains.cf
 ADD mysql-virtual-mailbox-maps.cf /etc/postfix/mysql-virtual-mailbox-maps.cf
 
+RUN chmod 600 /etc/postfix/*.cf
+
 RUN mkdir -p /var/spool/postfix/private/dovecot
 
 RUN postconf maillog_file=/var/log/postfix.log
@@ -60,4 +64,5 @@ COPY supervisord.conf /etc/
 
 RUN chown opendkim:opendkim /etc/opendkim/mail
 
-CMD supervisord
+ENTRYPOINT ["supervisord"]
+CMD []

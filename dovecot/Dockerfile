@@ -1,5 +1,7 @@
 FROM alpine:latest
 
+LABEL maintainer="Daniël Emmery : github.com/dmry"
+
 RUN addgroup -g 3001 dovecot
 RUN addgroup -g 3003 postfix
 RUN adduser -D -s /sbin/nologin -u 2001 -G dovecot dovecot
@@ -8,8 +10,6 @@ RUN adduser -D -s /sbin/nologin -u 1000 -G postfix postfix
 RUN apk add -uU openssl ca-certificates dovecot dovecot-lmtpd dovecot-mysql && \
     rm -rf /var/cache/apk/* &&\
     echo "0       4       *       *       *       apk update && apk upgrade > /var/log/cron-apk.log" >> /var/spool/cron/crontabs/root
-
-#RUN openssl req -subj "/C=NL/CN=Unknown" -new -x509 -days 1000 -nodes -out "/etc/ssl/certs/dovecot.pem" -keyout "/etc/ssl/private/dovecot.pem"
 
 ADD dovecot.conf /etc/dovecot/dovecot.conf
 ADD dovecot-sql.conf.ext /etc/dovecot/dovecot-sql.conf.ext
@@ -22,4 +22,5 @@ RUN mkdir -p /var/spool/postfix/private/dovecot
 
 RUN install -d -o mail -g dovecot /mail
 
-CMD dovecot -F
+ENTRYPOINT ["dovecot"]
+CMD ["-F"]
